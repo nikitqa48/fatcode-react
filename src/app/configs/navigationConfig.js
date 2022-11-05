@@ -1,14 +1,12 @@
 import i18next from 'i18next';
 import DocumentationNavigation from '../main/documentation/DocumentationNavigation';
 
-import ar from './navigation-i18n/ar';
 import en from './navigation-i18n/en';
-import tr from './navigation-i18n/tr';
+import ru from './navigation-i18n/ru';
 import authRoles from '../auth/authRoles';
 
 i18next.addResourceBundle('en', 'navigation', en);
-i18next.addResourceBundle('tr', 'navigation', tr);
-i18next.addResourceBundle('ar', 'navigation', ar);
+i18next.addResourceBundle('ru', 'navigation', ru);
 
 const navigationConfig = [
   {

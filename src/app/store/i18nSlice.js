@@ -1,9 +1,9 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit';
+import {createSelector, createSlice} from '@reduxjs/toolkit';
 import i18n from 'src/i18n';
-import { setDefaultSettings } from './fuse/settingsSlice';
+import {setDefaultSettings} from './fuse/settingsSlice';
 
 export const changeLanguage = (languageId) => (dispatch, getState) => {
-  const { direction } = getState().fuse.settings.defaults;
+  const {direction} = getState().fuse.settings.defaults;
 
   const newLangDirection = i18n.dir(languageId);
 
@@ -11,7 +11,7 @@ export const changeLanguage = (languageId) => (dispatch, getState) => {
     If necessary, change theme direction
      */
   if (newLangDirection !== direction) {
-    dispatch(setDefaultSettings({ direction: newLangDirection }));
+    dispatch(setDefaultSettings({direction: newLangDirection}));
   }
 
   /*
@@ -27,9 +27,8 @@ const i18nSlice = createSlice({
   initialState: {
     language: i18n.options.lng,
     languages: [
-      { id: 'en', title: 'English', flag: 'US' },
-      { id: 'tr', title: 'Turkish', flag: 'TR' },
-      { id: 'ar', title: 'Arabic', flag: 'SA' },
+      {id: 'en', title: 'English', flag: 'US'},
+      {id: 'ru', title: 'Русский', flag: 'RU'},
     ],
   },
   reducers: {
@@ -39,9 +38,9 @@ const i18nSlice = createSlice({
   },
 });
 
-export const selectCurrentLanguageId = ({ i18n: _i18n }) => _i18n.language;
+export const selectCurrentLanguageId = ({i18n: _i18n}) => _i18n.language;
 
-export const selectLanguages = ({ i18n: _i18n }) => _i18n.languages;
+export const selectLanguages = ({i18n: _i18n}) => _i18n.languages;
 
 export const selectCurrentLanguageDirection = createSelector([selectCurrentLanguageId], (id) => {
   return i18n.dir(id);
