@@ -143,7 +143,7 @@ function Course(props) {
                   startIcon={<FuseSvgIcon>heroicons-outline:arrow-narrow-left</FuseSvgIcon>}
                   onClick={handleBack}
                 >
-                  {t('PREV')}
+                  пред.
                 </Button>
                 <Button
                   className="pointer-events-none min-h-56"
@@ -155,7 +155,7 @@ function Course(props) {
                   endIcon={<FuseSvgIcon>heroicons-outline:arrow-narrow-right</FuseSvgIcon>}
                   onClick={handleNext}
                 >
-                  Next
+                  след.
                 </Button>
               </ButtonGroup>
             </div>
