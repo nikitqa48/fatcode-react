@@ -68,15 +68,16 @@ function SignInPage() {
     <div className="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-1 min-w-0">
       <Paper className="h-full sm:h-auto md:flex md:items-center md:justify-end w-full sm:w-auto md:h-full md:w-1/2 py-8 px-16 sm:p-48 md:p-64 sm:rounded-2xl md:rounded-none sm:shadow md:shadow-none ltr:border-r-1 rtl:border-l-1">
         <div className="w-full max-w-320 sm:w-320 mx-auto sm:mx-0">
-          <img className="w-48" src="assets/images/logo/logo.svg" alt="logo" />
+          <img className="w-48 hidden" src="assets/images/logo/logo.svg" alt="logo" />
+          <img className='w-50' src='assets/images/logo/logo-text-on-dark.svg'/>
 
           <Typography className="mt-32 text-4xl font-extrabold tracking-tight leading-tight">
-            Sign in
+            Вход
           </Typography>
           <div className="flex items-baseline mt-2 font-medium">
-            <Typography>Don't have an account?</Typography>
+            <Typography>Вы здесь первый раз?</Typography>
             <Link className="ml-4" to="/sign-up">
-              Sign up
+              Зарегистрироваться
             </Link>
           </div>
 
@@ -130,7 +131,7 @@ function SignInPage() {
                 render={({ field }) => (
                   <FormControl>
                     <FormControlLabel
-                      label="Remember me"
+                      label="Запомнить меня"
                       control={<Checkbox size="small" {...field} />}
                     />
                   </FormControl>
@@ -138,7 +139,7 @@ function SignInPage() {
               />
 
               <Link className="text-md font-medium" to="/pages/auth/forgot-password">
-                Forgot password?
+                Забыли пароль?
               </Link>
             </div>
 
@@ -151,33 +152,33 @@ function SignInPage() {
               type="submit"
               size="large"
             >
-              Sign in
+              Войти
             </Button>
 
             <div className="flex items-center mt-32">
               <div className="flex-auto mt-px border-t" />
               <Typography className="mx-8" color="text.secondary">
-                Or continue with
+                или продолжить с
               </Typography>
               <div className="flex-auto mt-px border-t" />
             </div>
 
-            <div className="flex items-center mt-32 space-x-16">
-              <Button variant="outlined" className="flex-auto">
+            <div className="flex items-center mt-32 justify-center">
+              {/* <Button variant="outlined" className="flex-auto">
                 <FuseSvgIcon size={20} color="action">
                   feather:facebook
                 </FuseSvgIcon>
-              </Button>
-              <Button variant="outlined" className="flex-auto">
-                <FuseSvgIcon size={20} color="action">
-                  feather:twitter
-                </FuseSvgIcon>
-              </Button>
-              <Button variant="outlined" className="flex-auto">
+              </Button> */}
+              <Button variant="outlined" className="px-14">
                 <FuseSvgIcon size={20} color="action">
                   feather:github
                 </FuseSvgIcon>
               </Button>
+              {/* <Button variant="outlined" className="flex-auto">
+                <FuseSvgIcon size={20} color="action">
+                  feather:twitter
+                </FuseSvgIcon>
+              </Button> */}
             </div>
           </form>
         </div>
