@@ -20,11 +20,11 @@ import { ImageList, ImageListItem } from '@mui/material';
  * Form Validation Schema
  */
 const schema = yup.object().shape({
-  email: yup.string().email('You must enter a valid email').required('You must enter a email'),
+  email: yup.string().email('Введите ваш email').required('Введите ваш email'),
   password: yup
     .string()
-    .required('Please enter your password.')
-    .min(4, 'Password is too short - must be at least 4 chars.'),
+    .required('Пожалуйста введите ваш пароль.')
+    .min(4, 'Короткий пароль - должен быть не менее 4 символов.'),
 });
 
 const defaultValues = {
