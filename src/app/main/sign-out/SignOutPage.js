@@ -2,6 +2,7 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { useEffect } from 'react';
 import JwtService from '../../auth/services/jwtService';
+import { Link } from 'react-router-dom';
 
 function SignOutPage() {
   useEffect(() => {
@@ -19,6 +20,13 @@ function SignOutPage() {
 
           <Typography className="mt-32 text-4xl font-extrabold tracking-tight leading-tight text-center">
             Вы вышли!
+          </Typography>
+
+          <Typography className="mt-32 text-md font-medium text-center" color="text.secondary">
+            <span>Забыли покормить кота?</span>
+            <Link className="ml-4" to="/sign-in">
+              вернуться
+            </Link>
           </Typography>
         </div>
       </Paper>
