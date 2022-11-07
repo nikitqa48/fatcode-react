@@ -10,12 +10,11 @@ import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 import _ from '@lodash';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import AvatarGroup from '@mui/material/AvatarGroup';
-import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { useEffect } from 'react';
 import jwtService from '../../auth/services/jwtService';
+import { ImageList, ImageListItem } from '@mui/material';
 
 /**
  * Form Validation Schema
@@ -62,7 +61,15 @@ function SignInPage() {
           });
         });
       });
-  }
+  };
+
+  const imageCats = [
+    { id: 1, img: 'assets/images/cats/cat', title: 'cat' },
+    { id: 2, img: 'assets/images/cats/cat', title: 'cat' },
+    { id: 3, img: 'assets/images/cats/cat', title: 'cat' },
+    { id: 4, img: 'assets/images/cats/cat', title: 'cat' },
+    { id: 5, img: 'assets/images/cats/cat', title: 'cat' },
+  ];
 
   return (
     <div className="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-1 min-w-0">
@@ -113,7 +120,7 @@ function SignInPage() {
                 <TextField
                   {...field}
                   className="mb-24"
-                  label="Password"
+                  label="Пароль"
                   type="password"
                   error={!!errors.password}
                   helperText={errors?.password?.message}
@@ -164,21 +171,11 @@ function SignInPage() {
             </div>
 
             <div className="flex items-center mt-32 justify-center">
-              {/* <Button variant="outlined" className="flex-auto">
-                <FuseSvgIcon size={20} color="action">
-                  feather:facebook
-                </FuseSvgIcon>
-              </Button> */}
               <Button variant="outlined" className="px-14">
                 <FuseSvgIcon size={20} color="action">
                   feather:github
                 </FuseSvgIcon>
               </Button>
-              {/* <Button variant="outlined" className="flex-auto">
-                <FuseSvgIcon size={20} color="action">
-                  feather:twitter
-                </FuseSvgIcon>
-              </Button> */}
             </div>
           </form>
         </div>
@@ -233,31 +230,36 @@ function SignInPage() {
         </Box>
 
         <div className="z-10 relative w-full max-w-2xl">
-          <div className="text-7xl font-bold leading-none text-gray-100">
-            <div>Welcome to</div>
-            <div>our community</div>
+          <div className="flex justify-center text-7xl font-bold leading-none text-gray-100">
+            <div>Выберите питомца</div>
           </div>
-          <div className="mt-24 text-lg tracking-tight leading-6 text-gray-400">
-            Fuse helps developers to build organized and well coded dashboards full of beautiful and
-            rich modules. Join us and start building your application today.
-          </div>
-          <div className="flex items-center mt-32">
-            <AvatarGroup
-              sx={{
-                '& .MuiAvatar-root': {
-                  borderColor: 'primary.main',
-                },
-              }}
-            >
-              <Avatar src="assets/images/avatars/female-18.jpg" />
-              <Avatar src="assets/images/avatars/female-11.jpg" />
-              <Avatar src="assets/images/avatars/male-09.jpg" />
-              <Avatar src="assets/images/avatars/male-16.jpg" />
-            </AvatarGroup>
 
-            <div className="ml-16 font-medium tracking-tight text-gray-400">
-              More than 17k people joined us, it's your turn
+          <div className="relative mt-40 text-lg tracking-tight leading-6 text-gray-400">
+            <div className='absolute w-full h-full flex justify-between items-center'>
+              <FuseSvgIcon className="text-48 -ml-40" size={35} color="secondary">heroicons-solid:chevron-left</FuseSvgIcon>
+              <FuseSvgIcon className="text-48 -mr-40" size={35} color="secondary">heroicons-solid:chevron-right</FuseSvgIcon>
             </div>
+
+            <ImageList sx={{
+              display: 'flex',
+              alignItems: 'center'
+            }}>
+            {imageCats.map((item) => (
+              <ImageListItem key={item.id}>
+                <div className='flex content-center'>
+                  <img 
+                    src={`${item.img}${item.id}.svg`}
+                    alt={item.title}
+                    loading='lazy'
+                  /> 
+                </div> 
+              </ImageListItem>
+            ))}
+            </ImageList>
+          </div>
+
+          <div className="flex justify-center text-2xl tracking-tight leading-6 text-gray-400 mt-32">
+            имя питомца
           </div>
         </div>
       </Box>
