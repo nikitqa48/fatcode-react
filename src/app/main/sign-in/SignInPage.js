@@ -144,8 +144,8 @@ function SignInPage() {
                   </FormControl>
                 )}
               />
-
-              <Link className="text-md font-medium" to="/pages/auth/forgot-password">
+{/* /pages/auth/forgot-password */}
+              <Link className="text-md font-medium" to="/forgot-password">
                 Забыли пароль?
               </Link>
             </div>
