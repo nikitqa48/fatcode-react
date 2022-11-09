@@ -1,6 +1,8 @@
 import FuseUtils from '@fuse/utils';
 import FuseLoading from '@fuse/core/FuseLoading';
-import { Navigate } from 'react-router-dom';
+import {
+  Navigate
+} from 'react-router-dom';
 import settingsConfig from 'app/configs/settingsConfig';
 import userInterfaceConfigs from '../main/user-interface/UserInterfaceConfigs';
 import SignInConfig from '../main/sign-in/SignInConfig';
@@ -12,6 +14,9 @@ import pagesConfigs from '../main/pages/pagesConfigs';
 import authRoleExamplesConfigs from '../main/auth/authRoleExamplesConfigs';
 import DocumentationConfig from '../main/documentation/DocumentationConfig';
 
+// импортирую страницу, если был зыбвт пароль
+import ForgotPasswordPagesConfig from '../main/forgot-password/ForgotPasswordPagesConfig';
+
 const routeConfigs = [
   ...appsConfigs,
   ...dashboardsConfigs,
@@ -22,22 +27,25 @@ const routeConfigs = [
   SignOutConfig,
   SignInConfig,
   SignUpConfig,
+
+  // Забыт пароль
+  ForgotPasswordPagesConfig,
 ];
 
 const routes = [
   ...FuseUtils.generateRoutesFromConfigs(routeConfigs, settingsConfig.defaultAuth),
   {
     path: '/',
-    element: <Navigate to="dashboards/analytics" />,
+    element: < Navigate to = "dashboards/analytics" / > ,
     auth: settingsConfig.defaultAuth,
   },
   {
     path: 'loading',
-    element: <FuseLoading />,
+    element: < FuseLoading / > ,
   },
   {
     path: '*',
-    element: <Navigate to="pages/error/404" />,
+    element: < Navigate to = "pages/error/404" / > ,
   },
 ];
 
