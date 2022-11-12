@@ -61,12 +61,33 @@ class JwtService extends FuseUtils.EventEmitter {
     });
   };
 
-  signInWithEmailAndPassword = (email, password) => {
+  // signInWithEmailAndPassword = (email, password) => {
+  //   return new Promise((resolve, reject) => {
+  //     axios
+  //       .get(jwtServiceConfig.signIn, {
+  //         data: {
+  //           email,
+  //           password,
+  //         },
+  //       })
+  //       .then((response) => {
+  //         if (response.data.user) {
+  //           this.setSession(response.data.access_token);
+  //           resolve(response.data.user);
+  //           this.emit('onLogin', response.data.user);
+  //         } else {
+  //           reject(response.data.error);
+  //         }
+  //       });
+  //   });
+  // };
+
+  signInWithLoginAndPassword = (login, password) => {
     return new Promise((resolve, reject) => {
       axios
         .get(jwtServiceConfig.signIn, {
           data: {
-            email,
+            login,
             password,
           },
         })
