@@ -35,7 +35,7 @@ function AuthProvider({ children }) {
     });
 
     jwtService.on('onLogout', () => {
-      pass('Выход их приложения');
+      pass('Выход из приложения');
 
       dispatch(logoutUser());
     });

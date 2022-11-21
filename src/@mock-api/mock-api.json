@@ -7323,6 +7323,7 @@
               "displayName": "Abbott Keitch",
               "photoURL": "assets/images/avatars/brian-hughes.jpg",
               "email": "admin@fusetheme.com",
+              "login": "admin",
               "settings": {
                 "layout": {},
                 "theme": {}
@@ -32644,6 +32645,7 @@
               "displayName": "Abbott Keitch",
               "photoURL": "assets/images/avatars/brian-hughes.jpg",
               "email": "admin@fusetheme.com",
+              "login": "admin",
               "settings": {
                 "layout": {},
                 "theme": {}

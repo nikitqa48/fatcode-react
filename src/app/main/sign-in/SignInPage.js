@@ -45,11 +45,29 @@ function SignInPage() {
   useEffect(() => {
     setValue('email', 'admin@fusetheme.com', { shouldDirty: true, shouldValidate: true });
     setValue('password', 'admin', { shouldDirty: true, shouldValidate: true });
+    setValue('login', 'admin', { shouldDirty: true, shouldValidate: true });
   }, [setValue]);
 
-  function onSubmit({ email, password }) {
+  // Оставить комментарий, если нужно будет вернуть авторизацию по email
+  // function onSubmit({ email, password }) {
+  //   jwtService
+  //     .signInWithEmailAndPassword(email, password)
+  //     .then((user) => {
+  //       // No need to do anything, user data will be set at app/auth/AuthContext
+  //     })
+  //     .catch((_errors) => {
+  //       _errors.forEach((error) => {
+  //         setError(error.type, {
+  //           type: 'manual',
+  //           message: error.message,
+  //         });
+  //       });
+  //     });
+  // };
+
+  function onSubmit({ login, password }) {
     jwtService
-      .signInWithEmailAndPassword(email, password)
+      .signInWithLoginAndPassword(login, password)
       .then((user) => {
         // No need to do anything, user data will be set at app/auth/AuthContext
       })
@@ -94,7 +112,8 @@ function SignInPage() {
             className="flex flex-col justify-center w-full mt-32"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <Controller
+            {/* Оставить комментарий, если нужно будет вернуть авторизацию по email */}
+            {/* <Controller
               name="email"
               control={control}
               render={({ field }) => (
@@ -106,6 +125,24 @@ function SignInPage() {
                   type="email"
                   error={!!errors.email}
                   helperText={errors?.email?.message}
+                  variant="outlined"
+                  required
+                  fullWidth
+                />
+              )}
+            /> */}
+
+            <Controller
+              name="login"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  className="mb-24"
+                  label="Логин"
+                  type="text"
+                  error={!!errors.login}
+                  helperText={errors?.login?.message}
                   variant="outlined"
                   required
                   fullWidth
