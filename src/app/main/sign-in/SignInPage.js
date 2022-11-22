@@ -65,9 +65,9 @@ function SignInPage() {
   //     });
   // };
 
-  function onSubmit({ login, password }) {
+  function onSubmit({ email, password }) {
     jwtService
-      .signInWithLoginAndPassword(login, password)
+      .signInWithLoginAndPassword(email, password)
       .then((user) => {
         // No need to do anything, user data will be set at app/auth/AuthContext
       })
@@ -94,7 +94,7 @@ function SignInPage() {
       <Paper className="h-full sm:h-auto md:flex md:items-center md:justify-end w-full sm:w-auto md:h-full md:w-1/2 py-8 px-16 sm:p-48 md:p-64 sm:rounded-2xl md:rounded-none sm:shadow md:shadow-none ltr:border-r-1 rtl:border-l-1">
         <div className="w-full max-w-320 sm:w-320 mx-auto sm:mx-0">
           <img className="w-48 hidden" src="assets/images/logo/logo.svg" alt="logo" />
-          <img className='w-50' src='assets/images/logo/logo-text-on-dark.svg'/>
+          <img className='w-50' src='assets/images/logo/logo-text-on-dark.svg' alt='icon'/>
 
           <Typography className="mt-32 text-4xl font-extrabold tracking-tight leading-tight">
             Вход
@@ -113,7 +113,7 @@ function SignInPage() {
             onSubmit={handleSubmit(onSubmit)}
           >
             {/* Оставить комментарий, если нужно будет вернуть авторизацию по email */}
-            {/* <Controller
+             <Controller
               name="email"
               control={control}
               render={({ field }) => (
@@ -130,25 +130,25 @@ function SignInPage() {
                   fullWidth
                 />
               )}
-            /> */}
-
-            <Controller
-              name="login"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  className="mb-24"
-                  label="Логин"
-                  type="text"
-                  error={!!errors.login}
-                  helperText={errors?.login?.message}
-                  variant="outlined"
-                  required
-                  fullWidth
-                />
-              )}
             />
+
+            {/*<Controller*/}
+            {/*  name="login"*/}
+            {/*  control={control}*/}
+            {/*  render={({ field }) => (*/}
+            {/*    <TextField*/}
+            {/*      {...field}*/}
+            {/*      className="mb-24"*/}
+            {/*      label="Логин"*/}
+            {/*      type="text"*/}
+            {/*      error={!!errors.login}*/}
+            {/*      helperText={errors?.login?.message}*/}
+            {/*      variant="outlined"*/}
+            {/*      required*/}
+            {/*      fullWidth*/}
+            {/*    />*/}
+            {/*  )}*/}
+            {/*/>*/}
 
             <Controller
               name="password"
