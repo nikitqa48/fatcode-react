@@ -82,6 +82,7 @@ class JwtService extends FuseUtils.EventEmitter {
   //   });
   // };
 
+
   signInWithLoginAndPassword = (username, password) => {
     // return new Promise((resolve, reject) => {
       console.log(username, password)
