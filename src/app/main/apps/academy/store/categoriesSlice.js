@@ -1,8 +1,9 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import {BASE_URL} from "../../../../../api";
 
 export const getCategories = createAsyncThunk('academyApp/categories/getCategories', async () => {
-  const response = await axios.get('http://194.67.110.24/api/v1/courses/tags/');
+  const response = await axios.get(`${BASE_URL}/courses/tags/`);
   const data = await response.data;
   return data.results;
 });

@@ -20,7 +20,7 @@ import { ImageList, ImageListItem } from '@mui/material';
  * Form Validation Schema
  */
 const schema = yup.object().shape({
-  email: yup.string().email('Введите ваш email').required('Введите ваш email'),
+ // login: yup.string().email('Введите ваш email').required('Введите ваш email'),
   password: yup
     .string()
     .required('Пожалуйста введите ваш пароль.')
@@ -28,7 +28,7 @@ const schema = yup.object().shape({
 });
 
 const defaultValues = {
-  email: '',
+  login: '',
   password: '',
   remember: true,
 };
@@ -43,7 +43,7 @@ function SignInPage() {
   const { isValid, dirtyFields, errors } = formState;
 
   useEffect(() => {
-    setValue('email', 'admin@fusetheme.com', { shouldDirty: true, shouldValidate: true });
+    // setValue('email', 'admin@fusetheme.com', { shouldDirty: true, shouldValidate: true });
     setValue('password', 'admin', { shouldDirty: true, shouldValidate: true });
     setValue('login', 'admin', { shouldDirty: true, shouldValidate: true });
   }, [setValue]);
@@ -65,20 +65,20 @@ function SignInPage() {
   //     });
   // };
 
-  function onSubmit({ email, password }) {
+  function onSubmit({ login, password }) {
     jwtService
-      .signInWithLoginAndPassword(email, password)
-      .then((user) => {
-        // No need to do anything, user data will be set at app/auth/AuthContext
-      })
-      .catch((_errors) => {
-        _errors.forEach((error) => {
-          setError(error.type, {
-            type: 'manual',
-            message: error.message,
-          });
-        });
-      });
+      .signInWithLoginAndPassword(login, password)
+      // .then((user) => {
+      //   // No need to do anything, user data will be set at app/auth/AuthContext
+      // })
+      // .catch((_errors) => {
+      //   _errors.forEach((error) => {
+      //     setError(error.type, {
+      //       type: 'manual',
+      //       message: error.message,
+      //     });
+      //   });
+      // });
   };
 
   const imageCats = [
@@ -113,42 +113,42 @@ function SignInPage() {
             onSubmit={handleSubmit(onSubmit)}
           >
             {/* Оставить комментарий, если нужно будет вернуть авторизацию по email */}
-             <Controller
-              name="email"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  className="mb-24"
-                  label="Email"
-                  autoFocus
-                  type="email"
-                  error={!!errors.email}
-                  helperText={errors?.email?.message}
-                  variant="outlined"
-                  required
-                  fullWidth
-                />
-              )}
-            />
-
-            {/*<Controller*/}
-            {/*  name="login"*/}
+            {/* <Controller*/}
+            {/*  name="email"*/}
             {/*  control={control}*/}
             {/*  render={({ field }) => (*/}
             {/*    <TextField*/}
             {/*      {...field}*/}
             {/*      className="mb-24"*/}
-            {/*      label="Логин"*/}
-            {/*      type="text"*/}
-            {/*      error={!!errors.login}*/}
-            {/*      helperText={errors?.login?.message}*/}
+            {/*      label="Email"*/}
+            {/*      autoFocus*/}
+            {/*      type="email"*/}
+            {/*      error={!!errors.email}*/}
+            {/*      helperText={errors?.email?.message}*/}
             {/*      variant="outlined"*/}
             {/*      required*/}
             {/*      fullWidth*/}
             {/*    />*/}
             {/*  )}*/}
             {/*/>*/}
+
+            <Controller
+              name="login"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  className="mb-24"
+                  label="Логин"
+                  type="text"
+                  error={!!errors.login}
+                  helperText={errors?.login?.message}
+                  variant="outlined"
+                  required
+                  fullWidth
+                />
+              )}
+            />
 
             <Controller
               name="password"

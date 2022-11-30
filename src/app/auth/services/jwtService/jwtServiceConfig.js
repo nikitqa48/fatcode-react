@@ -1,7 +1,9 @@
+import {BASE_URL} from "../../../../api";
+
 const jwtServiceConfig = {
-  signIn: 'http://194.67.110.24/api/v1/auth/token/login/',
+  signIn:  `${BASE_URL}/auth/token/login/`,
   // signUp: 'api/auth/sign-up',
-  // accessToken: 'api/auth/access-token',
+  accessToken: `${BASE_URL}/auth/token/login/`,
   // updateUser: 'api/auth/user/update',
 };
 
