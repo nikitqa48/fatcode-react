@@ -61,49 +61,69 @@ class JwtService extends FuseUtils.EventEmitter {
     });
   };
 
-  signInWithEmailAndPassword = (email, password) => {
-    return new Promise((resolve, reject) => {
+  // signInWithEmailAndPassword = (email, password) => {
+  //   return new Promise((resolve, reject) => {
+  //     axios
+  //       .get(jwtServiceConfig.signIn, {
+  //         data: {
+  //           email,
+  //           password,
+  //         },
+  //       })
+  //       .then((response) => {
+  //         if (response.data.user) {
+  //           this.setSession(response.data.access_token);
+  //           resolve(response.data.user);
+  //           this.emit('onLogin', response.data.user);
+  //         } else {
+  //           reject(response.data.error);
+  //         }
+  //       });
+  //   });
+  // };
+
+  signInWithLoginAndPassword = (username, password) => {
+    // return new Promise((resolve, reject) => {
       axios
-        .get(jwtServiceConfig.signIn, {
-          data: {
-            email,
+        .post(jwtServiceConfig.signIn, {
             password,
-          },
+            username,
         })
         .then((response) => {
-          if (response.data.user) {
-            this.setSession(response.data.access_token);
-            resolve(response.data.user);
-            this.emit('onLogin', response.data.user);
-          } else {
-            reject(response.data.error);
-          }
+          if (response.data) {
+          //   this.setSession(response.data.access_token);
+          //   resolve(response.data.user);
+          //   this.emit('onLogin', response.data.user);
+          // } else {
+          //   reject(response.data.error);
+           }
+            console.log(response)
         });
-    });
   };
 
   signInWithToken = () => {
-    return new Promise((resolve, reject) => {
+  //  return new Promise((resolve, reject) => {
       axios
-        .get(jwtServiceConfig.accessToken, {
+        .post(jwtServiceConfig.accessToken, {
           data: {
-            access_token: this.getAccessToken(),
+            auth_token: this.getAccessToken(),
           },
         })
         .then((response) => {
-          if (response.data.user) {
-            this.setSession(response.data.access_token);
-            resolve(response.data.user);
+          if (response.data.auth_token) {
+            this.setSession(response.data.auth_token);
+            console.log(response.data.auth_token)
+            // resolve(response.data.user);
           } else {
             this.logout();
-            reject(new Error('Failed to login with token.'));
+           // reject(new Error('Failed to login with token.'));
           }
         })
         .catch((error) => {
           this.logout();
-          reject(new Error('Failed to login with token.'));
+         // reject(new Error('Failed to login with token.'));
         });
-    });
+   // });
   };
 
   updateUserData = (user) => {

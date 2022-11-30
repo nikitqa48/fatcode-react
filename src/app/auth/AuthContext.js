@@ -31,11 +31,11 @@ function AuthProvider({ children }) {
     });
 
     jwtService.on('onLogin', (user) => {
-      success(user, 'Signed in');
+      success(user, 'Добро пожаловать в приложение');
     });
 
     jwtService.on('onLogout', () => {
-      pass('Signed out');
+      pass('Выход из приложения');
 
       dispatch(logoutUser());
     });

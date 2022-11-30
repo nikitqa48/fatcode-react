@@ -10,26 +10,25 @@ import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 import _ from '@lodash';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import AvatarGroup from '@mui/material/AvatarGroup';
-import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { useEffect } from 'react';
 import jwtService from '../../auth/services/jwtService';
+import { ImageList, ImageListItem } from '@mui/material';
 
 /**
  * Form Validation Schema
  */
 const schema = yup.object().shape({
-  email: yup.string().email('You must enter a valid email').required('You must enter a email'),
+ // login: yup.string().email('Введите ваш email').required('Введите ваш email'),
   password: yup
     .string()
-    .required('Please enter your password.')
-    .min(4, 'Password is too short - must be at least 4 chars.'),
+    .required('Пожалуйста введите ваш пароль.')
+    .min(4, 'Короткий пароль - должен быть не менее 4 символов.'),
 });
 
 const defaultValues = {
-  email: '',
+  login: '',
   password: '',
   remember: true,
 };
@@ -44,39 +43,66 @@ function SignInPage() {
   const { isValid, dirtyFields, errors } = formState;
 
   useEffect(() => {
-    setValue('email', 'admin@fusetheme.com', { shouldDirty: true, shouldValidate: true });
+    // setValue('email', 'admin@fusetheme.com', { shouldDirty: true, shouldValidate: true });
     setValue('password', 'admin', { shouldDirty: true, shouldValidate: true });
+    setValue('login', 'admin', { shouldDirty: true, shouldValidate: true });
   }, [setValue]);
 
-  function onSubmit({ email, password }) {
+  // Оставить комментарий, если нужно будет вернуть авторизацию по email
+  // function onSubmit({ email, password }) {
+  //   jwtService
+  //     .signInWithEmailAndPassword(email, password)
+  //     .then((user) => {
+  //       // No need to do anything, user data will be set at app/auth/AuthContext
+  //     })
+  //     .catch((_errors) => {
+  //       _errors.forEach((error) => {
+  //         setError(error.type, {
+  //           type: 'manual',
+  //           message: error.message,
+  //         });
+  //       });
+  //     });
+  // };
+
+  function onSubmit({ login, password }) {
     jwtService
-      .signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        // No need to do anything, user data will be set at app/auth/AuthContext
-      })
-      .catch((_errors) => {
-        _errors.forEach((error) => {
-          setError(error.type, {
-            type: 'manual',
-            message: error.message,
-          });
-        });
-      });
-  }
+      .signInWithLoginAndPassword(login, password)
+      // .then((user) => {
+      //   // No need to do anything, user data will be set at app/auth/AuthContext
+      // })
+      // .catch((_errors) => {
+      //   _errors.forEach((error) => {
+      //     setError(error.type, {
+      //       type: 'manual',
+      //       message: error.message,
+      //     });
+      //   });
+      // });
+  };
+
+  const imageCats = [
+    { id: 1, img: 'assets/images/cats/cat', title: 'cat' },
+    { id: 2, img: 'assets/images/cats/cat', title: 'cat' },
+    { id: 3, img: 'assets/images/cats/cat', title: 'cat' },
+    { id: 4, img: 'assets/images/cats/cat', title: 'cat' },
+    { id: 5, img: 'assets/images/cats/cat', title: 'cat' },
+  ];
 
   return (
     <div className="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-1 min-w-0">
       <Paper className="h-full sm:h-auto md:flex md:items-center md:justify-end w-full sm:w-auto md:h-full md:w-1/2 py-8 px-16 sm:p-48 md:p-64 sm:rounded-2xl md:rounded-none sm:shadow md:shadow-none ltr:border-r-1 rtl:border-l-1">
         <div className="w-full max-w-320 sm:w-320 mx-auto sm:mx-0">
-          <img className="w-48" src="assets/images/logo/logo.svg" alt="logo" />
+          <img className="w-48 hidden" src="assets/images/logo/logo.svg" alt="logo" />
+          <img className='w-50' src='assets/images/logo/logo-text-on-dark.svg' alt='icon'/>
 
           <Typography className="mt-32 text-4xl font-extrabold tracking-tight leading-tight">
-            Sign in
+            Вход
           </Typography>
           <div className="flex items-baseline mt-2 font-medium">
-            <Typography>Don't have an account?</Typography>
+            <Typography>Вы здесь первый раз?</Typography>
             <Link className="ml-4" to="/sign-up">
-              Sign up
+              Зарегистрироваться
             </Link>
           </div>
 
@@ -86,18 +112,37 @@ function SignInPage() {
             className="flex flex-col justify-center w-full mt-32"
             onSubmit={handleSubmit(onSubmit)}
           >
+            {/* Оставить комментарий, если нужно будет вернуть авторизацию по email */}
+            {/* <Controller*/}
+            {/*  name="email"*/}
+            {/*  control={control}*/}
+            {/*  render={({ field }) => (*/}
+            {/*    <TextField*/}
+            {/*      {...field}*/}
+            {/*      className="mb-24"*/}
+            {/*      label="Email"*/}
+            {/*      autoFocus*/}
+            {/*      type="email"*/}
+            {/*      error={!!errors.email}*/}
+            {/*      helperText={errors?.email?.message}*/}
+            {/*      variant="outlined"*/}
+            {/*      required*/}
+            {/*      fullWidth*/}
+            {/*    />*/}
+            {/*  )}*/}
+            {/*/>*/}
+
             <Controller
-              name="email"
+              name="login"
               control={control}
               render={({ field }) => (
                 <TextField
                   {...field}
                   className="mb-24"
-                  label="Email"
-                  autoFocus
-                  type="email"
-                  error={!!errors.email}
-                  helperText={errors?.email?.message}
+                  label="Логин"
+                  type="text"
+                  error={!!errors.login}
+                  helperText={errors?.login?.message}
                   variant="outlined"
                   required
                   fullWidth
@@ -112,7 +157,7 @@ function SignInPage() {
                 <TextField
                   {...field}
                   className="mb-24"
-                  label="Password"
+                  label="Пароль"
                   type="password"
                   error={!!errors.password}
                   helperText={errors?.password?.message}
@@ -130,15 +175,15 @@ function SignInPage() {
                 render={({ field }) => (
                   <FormControl>
                     <FormControlLabel
-                      label="Remember me"
+                      label="Запомнить меня"
                       control={<Checkbox size="small" {...field} />}
                     />
                   </FormControl>
                 )}
               />
-
-              <Link className="text-md font-medium" to="/pages/auth/forgot-password">
-                Forgot password?
+{/* /pages/auth/forgot-password */}
+              <Link className="text-md font-medium" to="/forgot-password">
+                Забыли пароль?
               </Link>
             </div>
 
@@ -151,29 +196,19 @@ function SignInPage() {
               type="submit"
               size="large"
             >
-              Sign in
+              Войти
             </Button>
 
             <div className="flex items-center mt-32">
               <div className="flex-auto mt-px border-t" />
               <Typography className="mx-8" color="text.secondary">
-                Or continue with
+                или продолжить с
               </Typography>
               <div className="flex-auto mt-px border-t" />
             </div>
 
-            <div className="flex items-center mt-32 space-x-16">
-              <Button variant="outlined" className="flex-auto">
-                <FuseSvgIcon size={20} color="action">
-                  feather:facebook
-                </FuseSvgIcon>
-              </Button>
-              <Button variant="outlined" className="flex-auto">
-                <FuseSvgIcon size={20} color="action">
-                  feather:twitter
-                </FuseSvgIcon>
-              </Button>
-              <Button variant="outlined" className="flex-auto">
+            <div className="flex items-center mt-32 justify-center">
+              <Button variant="outlined" className="px-14">
                 <FuseSvgIcon size={20} color="action">
                   feather:github
                 </FuseSvgIcon>
@@ -232,31 +267,36 @@ function SignInPage() {
         </Box>
 
         <div className="z-10 relative w-full max-w-2xl">
-          <div className="text-7xl font-bold leading-none text-gray-100">
-            <div>Welcome to</div>
-            <div>our community</div>
+          <div className="flex justify-center text-7xl font-bold leading-none text-gray-100">
+            <div>Выберите питомца</div>
           </div>
-          <div className="mt-24 text-lg tracking-tight leading-6 text-gray-400">
-            Fuse helps developers to build organized and well coded dashboards full of beautiful and
-            rich modules. Join us and start building your application today.
-          </div>
-          <div className="flex items-center mt-32">
-            <AvatarGroup
-              sx={{
-                '& .MuiAvatar-root': {
-                  borderColor: 'primary.main',
-                },
-              }}
-            >
-              <Avatar src="assets/images/avatars/female-18.jpg" />
-              <Avatar src="assets/images/avatars/female-11.jpg" />
-              <Avatar src="assets/images/avatars/male-09.jpg" />
-              <Avatar src="assets/images/avatars/male-16.jpg" />
-            </AvatarGroup>
 
-            <div className="ml-16 font-medium tracking-tight text-gray-400">
-              More than 17k people joined us, it's your turn
+          <div className="relative mt-40 text-lg tracking-tight leading-6 text-gray-400">
+            <div className='absolute w-full h-full flex justify-between items-center'>
+              <FuseSvgIcon className="text-48 -ml-40" size={35} color="secondary">heroicons-solid:chevron-left</FuseSvgIcon>
+              <FuseSvgIcon className="text-48 -mr-40" size={35} color="secondary">heroicons-solid:chevron-right</FuseSvgIcon>
             </div>
+
+            <ImageList sx={{
+              display: 'flex',
+              alignItems: 'center'
+            }}>
+            {imageCats.map((item) => (
+              <ImageListItem key={item.id}>
+                <div className='flex content-center'>
+                  <img 
+                    src={`${item.img}${item.id}.svg`}
+                    alt={item.title}
+                    loading='lazy'
+                  /> 
+                </div> 
+              </ImageListItem>
+            ))}
+            </ImageList>
+          </div>
+
+          <div className="flex justify-center text-2xl tracking-tight leading-6 text-gray-400 mt-32">
+            имя питомца
           </div>
         </div>
       </Box>

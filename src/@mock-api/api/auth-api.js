@@ -13,22 +13,31 @@ let usersApi = mockApi.components.examples.auth_users.value;
 
 mock.onGet('/api/auth/sign-in').reply(async (config) => {
   const data = JSON.parse(config.data);
-  const { email, password } = data;
-  const user = _.cloneDeep(usersApi.find((_user) => _user.data.email === email));
+  const { email, password, login } = data;
+  // const user = _.cloneDeep(usersApi.find((_user) => _user.data.email === email));
+
+  const user = _.cloneDeep(usersApi.find((_user) => _user.data.login === login));
 
   const error = [];
 
   if (!user) {
     error.push({
       type: 'email',
-      message: 'Check your email address',
+      message: 'Проверьте свой email',
+    });
+  }
+
+  if (!user) {
+    error.push({
+      type: 'login',
+      message: 'Проверьте правильность написания логина',
     });
   }
 
   if (user && user.password !== password) {
     error.push({
       type: 'password',
-      message: 'Check your password',
+      message: 'Проверьте свой пароль',
     });
   }
 
