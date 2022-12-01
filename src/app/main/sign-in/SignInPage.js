@@ -20,7 +20,7 @@ import { ImageList, ImageListItem } from '@mui/material';
  * Form Validation Schema
  */
 const schema = yup.object().shape({
-  email: yup.string().email('Введите ваш email').required('Введите ваш email'),
+ // login: yup.string().email('Введите ваш email').required('Введите ваш email'),
   password: yup
     .string()
     .required('Пожалуйста введите ваш пароль.')
@@ -28,7 +28,7 @@ const schema = yup.object().shape({
 });
 
 const defaultValues = {
-  email: '',
+  login: '',
   password: '',
   remember: true,
 };
@@ -43,7 +43,7 @@ function SignInPage() {
   const { isValid, dirtyFields, errors } = formState;
 
   useEffect(() => {
-    setValue('email', 'admin@fusetheme.com', { shouldDirty: true, shouldValidate: true });
+    // setValue('email', 'admin@fusetheme.com', { shouldDirty: true, shouldValidate: true });
     setValue('password', 'admin', { shouldDirty: true, shouldValidate: true });
     setValue('login', 'admin', { shouldDirty: true, shouldValidate: true });
   }, [setValue]);
@@ -68,17 +68,17 @@ function SignInPage() {
   function onSubmit({ login, password }) {
     jwtService
       .signInWithLoginAndPassword(login, password)
-      .then((user) => {
-        // No need to do anything, user data will be set at app/auth/AuthContext
-      })
-      .catch((_errors) => {
-        _errors.forEach((error) => {
-          setError(error.type, {
-            type: 'manual',
-            message: error.message,
-          });
-        });
-      });
+      // .then((user) => {
+      //   // No need to do anything, user data will be set at app/auth/AuthContext
+      // })
+      // .catch((_errors) => {
+      //   _errors.forEach((error) => {
+      //     setError(error.type, {
+      //       type: 'manual',
+      //       message: error.message,
+      //     });
+      //   });
+      // });
   };
 
   const imageCats = [
@@ -94,7 +94,7 @@ function SignInPage() {
       <Paper className="h-full sm:h-auto md:flex md:items-center md:justify-end w-full sm:w-auto md:h-full md:w-1/2 py-8 px-16 sm:p-48 md:p-64 sm:rounded-2xl md:rounded-none sm:shadow md:shadow-none ltr:border-r-1 rtl:border-l-1">
         <div className="w-full max-w-320 sm:w-320 mx-auto sm:mx-0">
           <img className="w-48 hidden" src="assets/images/logo/logo.svg" alt="logo" />
-          <img className='w-50' src='assets/images/logo/logo-text-on-dark.svg'/>
+          <img className='w-50' src='assets/images/logo/logo-text-on-dark.svg' alt='icon'/>
 
           <Typography className="mt-32 text-4xl font-extrabold tracking-tight leading-tight">
             Вход
@@ -113,24 +113,24 @@ function SignInPage() {
             onSubmit={handleSubmit(onSubmit)}
           >
             {/* Оставить комментарий, если нужно будет вернуть авторизацию по email */}
-            {/* <Controller
-              name="email"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  className="mb-24"
-                  label="Email"
-                  autoFocus
-                  type="email"
-                  error={!!errors.email}
-                  helperText={errors?.email?.message}
-                  variant="outlined"
-                  required
-                  fullWidth
-                />
-              )}
-            /> */}
+            {/* <Controller*/}
+            {/*  name="email"*/}
+            {/*  control={control}*/}
+            {/*  render={({ field }) => (*/}
+            {/*    <TextField*/}
+            {/*      {...field}*/}
+            {/*      className="mb-24"*/}
+            {/*      label="Email"*/}
+            {/*      autoFocus*/}
+            {/*      type="email"*/}
+            {/*      error={!!errors.email}*/}
+            {/*      helperText={errors?.email?.message}*/}
+            {/*      variant="outlined"*/}
+            {/*      required*/}
+            {/*      fullWidth*/}
+            {/*    />*/}
+            {/*  )}*/}
+            {/*/>*/}
 
             <Controller
               name="login"

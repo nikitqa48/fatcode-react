@@ -147,8 +147,8 @@ function Courses(props) {
                                         <em> All </em>
                                     </MenuItem>
                                     {categories.map((category) => (
-                                        <MenuItem value={category.slug} key={category.id}>
-                                            {category.title}
+                                        <MenuItem value={category.name} key={category.id}>
+                                            {category.name}
                                         </MenuItem>
                                     ))}
                                 </Select>
