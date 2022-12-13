@@ -31,6 +31,7 @@ const defaultValues = {
   email: '',
   password: '',
   passwordConfirm: '',
+  invite: '',
   acceptTermsConditions: false,
 };
 
@@ -142,11 +143,27 @@ function ClassicSignUpPage() {
                 />
               )}
             />
-
+            <Controller
+              name="passwordConfirm"
+              control={control}
+              render={({field}) => (
+                <TextField
+                  {...field}
+                  className="mb-24"
+                  label="Invite"
+                  type="invite"
+                  error={!!errors.passwordConfirm}
+                  helperText={errors?.passwordConfirm?.message}
+                  variant="outlined"
+                  required
+                  fullWidth
+                />
+              )}
+            />
             <Controller
               name="acceptTermsConditions"
               control={control}
-              render={({ field }) => (
+              render={({field}) => (
                 <FormControl className="items-center" error={!!errors.acceptTermsConditions}>
                   <FormControlLabel
                     label="Я согласен с Условиями обслуживания и Политикой конфиденциальности"
