@@ -84,46 +84,46 @@ class JwtService extends FuseUtils.EventEmitter {
 
   signInWithLoginAndPassword = (username, password) => {
     // return new Promise((resolve, reject) => {
-      axios
-        .post(jwtServiceConfig.signIn, {
-            password,
-            username,
-        })
-        .then((response) => {
-          if (response.data) {
+    axios
+      .post(jwtServiceConfig.signIn, {
+        password,
+        username,
+      })
+      .then((response) => {
+        if (response.data) {
           //   this.setSession(response.data.access_token);
           //   resolve(response.data.user);
           //   this.emit('onLogin', response.data.user);
           // } else {
           //   reject(response.data.error);
-           }
-            console.log(response)
-        });
+        }
+        console.log(response)
+      });
   };
 
   signInWithToken = () => {
-  //  return new Promise((resolve, reject) => {
-      axios
-        .post(jwtServiceConfig.accessToken, {
-          data: {
-            auth_token: this.getAccessToken(),
-          },
-        })
-        .then((response) => {
-          if (response.data.auth_token) {
-            this.setSession(response.data.auth_token);
-            console.log(response.data.auth_token)
-            // resolve(response.data.user);
-          } else {
-            this.logout();
-           // reject(new Error('Failed to login with token.'));
-          }
-        })
-        .catch((error) => {
+    //  return new Promise((resolve, reject) => {
+    axios
+      .post(jwtServiceConfig.accessToken, {
+        data: {
+          auth_token: this.getAccessToken(),
+        },
+      })
+      .then((response) => {
+        if (response.data.auth_token) {
+          this.setSession(response.data.auth_token);
+          console.log(response.data.auth_token)
+          // resolve(response.data.user);
+        } else {
           this.logout();
-         // reject(new Error('Failed to login with token.'));
-        });
-   // });
+          // reject(new Error('Failed to login with token.'));
+        }
+      })
+      .catch((error) => {
+        this.logout();
+        // reject(new Error('Failed to login with token.'));
+      });
+    // });
   };
 
   updateUserData = (user) => {
