@@ -44,8 +44,8 @@ function SignInPage() {
 
   useEffect(() => {
     // setValue('email', 'admin@fusetheme.com', { shouldDirty: true, shouldValidate: true });
-    setValue('password', 'Djwoms25', { shouldDirty: true, shouldValidate: true });
-    setValue('login', 'DJWOMS', { shouldDirty: true, shouldValidate: true });
+    setValue('password', 'admin', { shouldDirty: true, shouldValidate: true });
+    setValue('login', 'admin', { shouldDirty: true, shouldValidate: true });
   }, [setValue]);
 
   // Оставить комментарий, если нужно будет вернуть авторизацию по email
@@ -69,7 +69,7 @@ function SignInPage() {
     jwtService
       .signInWithLoginAndPassword(login, password)
       .then((user) => {
-      // No need to do anything, user data will be set at app/auth/AuthContext
+        // No need to do anything, user data will be set at app/auth/AuthContext
       })
       .catch((_errors) => {
         _errors.forEach((error) => {

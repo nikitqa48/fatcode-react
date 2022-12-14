@@ -84,9 +84,9 @@ export const updateUserData = (user) => async (dispatch, getState) => {
 const initialState = {
   role: [], // guest
   data: {
-    displayName: 'John Doe',
-    photoURL: 'assets/images/avatars/brian-hughes.jpg',
-    email: 'johndoe@withinpixels.com',
+    username: '',
+    avatar: '',
+    email: '',
     shortcuts: ['apps.calendar', 'apps.mailbox', 'apps.contacts', 'apps.tasks'],
   },
 };

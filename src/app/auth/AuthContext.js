@@ -1,21 +1,21 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import { useDispatch } from 'react-redux';
 import FuseSplashScreen from '@fuse/core/FuseSplashScreen';
-import { showMessage } from 'app/store/fuse/messageSlice';
-import { logoutUser, setUser } from 'app/store/userSlice';
+import {showMessage} from 'app/store/fuse/messageSlice';
+import {logoutUser, setUser} from 'app/store/userSlice';
 import jwtService from './services/jwtService';
 
 const AuthContext = React.createContext();
 
-function AuthProvider({ children }) {
+function AuthProvider({children}) {
   const [isAuthenticated, setIsAuthenticated] = useState(undefined);
   const [waitAuthCheck, setWaitAuthCheck] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
     jwtService.on('onAutoLogin', () => {
-      dispatch(showMessage({ message: 'Signing in with JWT' }));
+      dispatch(showMessage({message: 'Signing in with JWT'}));
 
       /**
        * Sign in and retrieve user data with stored token
@@ -34,8 +34,8 @@ function AuthProvider({ children }) {
       success(user, 'Добро пожаловать на сайт');
     });
 
-    jwtService.on('onLogout', () => {
-      pass('Выход из приложения');
+    jwtService.on('onLogout', (messages) => {
+      pass(messages);
 
       dispatch(logoutUser());
     });
@@ -48,6 +48,15 @@ function AuthProvider({ children }) {
 
     jwtService.on('onNoAccessToken', () => {
       pass();
+    });
+
+    jwtService.on('registration', (message) => {
+      if (message) {
+        dispatch(showMessage({ message }));
+      }
+
+      setWaitAuthCheck(false);
+      setIsAuthenticated(false);
     });
 
     jwtService.init();
@@ -68,7 +77,7 @@ function AuthProvider({ children }) {
 
     function pass(message) {
       if (message) {
-        dispatch(showMessage({ message }));
+        dispatch(showMessage({message}));
       }
 
       setWaitAuthCheck(false);
@@ -77,9 +86,9 @@ function AuthProvider({ children }) {
   }, [dispatch]);
 
   return waitAuthCheck ? (
-    <FuseSplashScreen />
+    <FuseSplashScreen/>
   ) : (
-    <AuthContext.Provider value={{ isAuthenticated }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{isAuthenticated}}>{children}</AuthContext.Provider>
   );
 }
 
@@ -91,4 +100,4 @@ function useAuth() {
   return context;
 }
 
-export { AuthProvider, useAuth };
+export {AuthProvider, useAuth};

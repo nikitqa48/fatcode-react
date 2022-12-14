@@ -6,7 +6,6 @@ import jwtServiceConfig from './jwtServiceConfig';
 /* eslint-disable camelcase */
 
 class JwtService extends FuseUtils.EventEmitter {
-  user = {};
 
   init() {
     this.setInterceptors();
@@ -51,15 +50,27 @@ class JwtService extends FuseUtils.EventEmitter {
 
   createUser = (data) => {
     return new Promise((resolve, reject) => {
-      axios.post(jwtServiceConfig.signUp, data).then((response) => {
-        if (response.data.user) {
-          this.setSession(response.data.auth_token);
-          resolve(response.data.user);
-          this.emit('onLogin', response.data.user);
-        } else {
-          reject(response.data.error);
-        }
-      });
+      axios
+        .post(jwtServiceConfig.signUp, data)
+        .then((response) => {
+          if (response.data) {
+            // this.setSession(response.data.auth_token);
+            // resolve(response.data);
+            // this.emit('registration', 'Теперь можете войти!');
+            this.setSession(null);
+            // response.data.role = [];
+            this.emit('registration', 'Теперь можете войти!');
+          }
+        })
+        .catch((_errors) => {
+          const errors = [
+            {type: 'username', message: _errors.response.data.username},
+            {type: 'email', message: ''},
+            {type: 'password', message: _errors.response.data.password},
+            {type: 'invite', message: _errors.response.data.detail},
+          ];
+          reject(errors);
+        });
     });
   };
 
@@ -106,8 +117,8 @@ class JwtService extends FuseUtils.EventEmitter {
         })
         .catch((_errors) => {
           const errors = [
-            { type: 'password', message: _errors.response.data.non_field_errors },
-            { type: 'login', message: '' },
+            {type: 'password', message: _errors.response.data.non_field_errors},
+            {type: 'login', message: ''},
           ];
           reject(errors);
         });
@@ -158,7 +169,7 @@ class JwtService extends FuseUtils.EventEmitter {
 
   logout = () => {
     this.setSession(null);
-    this.emit('onLogout', 'Logged out');
+    this.emit('onLogout', 'Вы вышли!');
   };
 
   isAuthTokenValid = (access_token) => {
