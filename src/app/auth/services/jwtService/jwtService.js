@@ -121,6 +121,8 @@ class JwtService extends FuseUtils.EventEmitter {
         .then((response) => {
           if (response.data.id) {
             this.setSession(this.getAccessToken());
+            // TODO разобраться с ролями
+            response.data.role = 'admin';
             resolve(response.data);
           } else {
             this.logout();
