@@ -23,7 +23,7 @@ function AuthProvider({ children }) {
       jwtService
         .signInWithToken()
         .then((user) => {
-          success(user, 'Signed in with JWT');
+          success(user, 'Добро пожаловать в приложение!');
         })
         .catch((error) => {
           pass(error.message);
@@ -31,7 +31,7 @@ function AuthProvider({ children }) {
     });
 
     jwtService.on('onLogin', (user) => {
-      success(user, 'Добро пожаловать в приложение');
+      success(user, 'Добро пожаловать на сайт');
     });
 
     jwtService.on('onLogout', () => {
