@@ -84,7 +84,6 @@ class JwtService extends FuseUtils.EventEmitter {
   //   });
   // };
 
-
   signInWithLoginAndPassword = (username, password) => {
     return new Promise((resolve, reject) => {
       axios
@@ -96,6 +95,7 @@ class JwtService extends FuseUtils.EventEmitter {
           if (response.data) {
             this.setSession(response.data.auth_token);
             this.getUser().then((user) => {
+              // TODO разобраться с ролями
               user.role = 'admin';
               resolve(user);
               this.emit('onLogin', user);
@@ -106,8 +106,8 @@ class JwtService extends FuseUtils.EventEmitter {
         })
         .catch((_errors) => {
           const errors = [
-            {"type": "password", "message": _errors.response.data.non_field_errors},
-            {"type": "login", "message": ''},
+            { type: 'password', message: _errors.response.data.non_field_errors },
+            { type: 'login', message: '' },
           ];
           reject(errors);
         });
@@ -136,9 +136,7 @@ class JwtService extends FuseUtils.EventEmitter {
 
   getUser = () => {
     // return new Promise((resolve, reject) => {
-    return axios
-      .get(jwtServiceConfig.accessToken)
-      .then((response) => response.data)
+    return axios.get(jwtServiceConfig.accessToken).then((response) => response.data);
     // });
   };
 
@@ -180,7 +178,7 @@ class JwtService extends FuseUtils.EventEmitter {
         }
       })
       .catch((_errors) => {
-        console.log('E', _errors.data)
+        console.log('E', _errors.data);
         return false;
       });
     // const decoded = jwtDecode(access_token);
