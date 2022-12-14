@@ -8,7 +8,7 @@ function SignOutPage() {
   useEffect(() => {
     setTimeout(() => {
       JwtService.logout();
-    }, 60000);
+    }, 5000);
   }, []);
 
   return (
