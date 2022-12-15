@@ -18,7 +18,22 @@ const navigationConfig = [
         icon: 'heroicons-outline:clipboard-check',
         url: '/dashboards/project',
       },
-    ]
+    ],
+  },
+  {
+    id: 'teams',
+    title: 'Команды',
+    type: 'group',
+    icon: 'heroicons-outline:home',
+    children: [
+      {
+        id: 'app.teams',
+        title: 'Команды',
+        type: 'item',
+        icon: 'heroicons-outline:clipboard-check',
+        url: '/app/teams',
+      },
+    ],
   },
   //     {
   //       id: 'dashboards.analytics',
