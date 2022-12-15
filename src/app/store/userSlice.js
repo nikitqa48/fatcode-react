@@ -87,6 +87,7 @@ const initialState = {
     username: '',
     avatar: '',
     email: '',
+    full_name: 'Boris',
     shortcuts: ['apps.calendar', 'apps.mailbox', 'apps.contacts', 'apps.tasks'],
   },
 };

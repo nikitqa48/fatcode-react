@@ -7,6 +7,8 @@ import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
+import { useSelector } from 'react-redux';
+import { selectUser } from 'app/store/userSlice';
 import AboutTab from './tabs/AboutTab';
 import PhotosVideosTab from './tabs/PhotosVideosTab';
 import TimelineTab from './tabs/TimelineTab';
@@ -27,6 +29,7 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 function ProfileApp() {
   const [selectedTab, setSelectedTab] = useState(0);
   const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
+  const user = useSelector(selectUser);
 
   function handleTabChange(event, value) {
     setSelectedTab(value);
@@ -36,27 +39,23 @@ function ProfileApp() {
     <Root
       header={
         <div className="flex flex-col">
-          <img
-            className="h-160 lg:h-320 object-cover w-full"
-            src="assets/images/pages/profile/cover.jpg"
-            alt="Profile Cover"
-          />
+          <div className="h-120 lg:h-80 object-cover w-full"> </div>
 
           <div className="flex flex-col flex-0 lg:flex-row items-center max-w-5xl w-full mx-auto px-32 lg:h-72">
-            <div className="-mt-96 lg:-mt-88 rounded-full">
+            <div className="-mt-96 lg:-mt-5 rounded-full">
               <motion.div initial={{ scale: 0 }} animate={{ scale: 1, transition: { delay: 0.1 } }}>
                 <Avatar
                   sx={{ borderColor: 'background.paper' }}
                   className="w-128 h-128 border-4"
-                  src="assets/images/avatars/male-04.jpg"
+                  src={user.avatar}
                   alt="User avatar"
                 />
               </motion.div>
             </div>
 
             <div className="flex flex-col items-center lg:items-start mt-16 lg:mt-0 lg:ml-32">
-              <Typography className="text-lg font-bold leading-none">Brian Hughes</Typography>
-              <Typography color="text.secondary">London, UK</Typography>
+              <Typography className="text-lg font-bold leading-none">{user.username}</Typography>
+              <Typography color="text.secondary">{user.full_name}</Typography>
             </div>
 
             <div className="hidden lg:flex h-32 mx-32 border-l-2" />
@@ -65,13 +64,13 @@ function ProfileApp() {
               <div className="flex flex-col items-center">
                 <Typography className="font-bold">200k</Typography>
                 <Typography className="text-sm font-medium" color="text.secondary">
-                  FOLLOWERS
+                  Подписчиков
                 </Typography>
               </div>
               <div className="flex flex-col items-center">
                 <Typography className="font-bold">1.2k</Typography>
                 <Typography className="text-sm font-medium" color="text.secondary">
-                  FOLLOWING
+                  Подписки
                 </Typography>
               </div>
             </div>
