@@ -66,7 +66,7 @@ function TeamsAppHeader(props) {
                 heroicons-solid:bell
               </FuseSvgIcon>
               <Typography className="mx-6 leading-6 truncate" color="text.secondary">
-                You have 2 new messages and 15 new tasks
+                У вас 25 новых запросов в команду
               </Typography>
             </div>
           </div>
@@ -75,10 +75,10 @@ function TeamsAppHeader(props) {
           <Button
             className="whitespace-nowrap"
             variant="contained"
-            color="primary"
-            startIcon={<FuseSvgIcon size={20}>heroicons-solid:mail</FuseSvgIcon>}
+            color="success"
+            startIcon={<FuseSvgIcon size={20}>heroicons-solid:pencil</FuseSvgIcon>}
           >
-            Messages
+            Создать
           </Button>
           <Button
             className="whitespace-nowrap"

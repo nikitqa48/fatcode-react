@@ -14,12 +14,8 @@ const TeamsAppConfig = {
       element: <TeamsApp />,
       // children: [
       //   {
-      //     path: ':id',
-      //     element: <TaskForm />,
-      //   },
-      //   {
-      //     path: ':id/:type',
-      //     element: <TaskForm />,
+      //     path: 'team/:teamId',
+      //     element: <Team />,
       //   },
       // ],
     },

@@ -1,4 +1,5 @@
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import Paper from '@mui/material/Paper';
@@ -44,16 +45,16 @@ function TeamsWidget(props) {
             <Typography color="text.secondary">{team.tagline}</Typography>
           </div>
           <div className="flex items-center w-full border-t divide-x">
-            <a
+            <Button
               className="flex flex-auto items-center justify-center py-16 hover:bg-hover"
-              href={`mailto:${team.id}`}
+              to={team.id}
               role="button"
             >
               {/*<FuseSvgIcon size={20} color="action">*/}
               {/*  heroicons-solid:mail*/}
               {/*</FuseSvgIcon>*/}
               <Typography className="ml-8">Открыть</Typography>
-            </a>
+            </Button>
             {/*<a*/}
             {/*  className="flex flex-auto items-center justify-center py-16 hover:bg-hover"*/}
             {/*  href={`tel${team?.members_count}`}*/}
@@ -62,7 +63,7 @@ function TeamsWidget(props) {
               {/*<FuseSvgIcon size={20} color="action">*/}
               {/*  heroicons-solid:phone*/}
               {/*</FuseSvgIcon>*/}
-              <Typography className="ml-8">Call</Typography>
+              {/*<Typography className="ml-8">Call</Typography>*/}
             {/*</a>*/}
           </div>
         </Paper>
