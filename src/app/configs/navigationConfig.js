@@ -31,7 +31,7 @@ const navigationConfig = [
         title: 'Команды',
         type: 'item',
         icon: 'heroicons-outline:clipboard-check',
-        url: '/app/teams',
+        url: '/teams',
       },
     ],
   },
@@ -155,6 +155,12 @@ const navigationConfig = [
             type: 'item',
             url: '/apps/help-center',
             end: true,
+          },
+          {
+            id: 'apps.help-center.blog',
+            title: 'Статьи',
+            type: 'item',
+            url: '/apps/help-center/articles',
           },
           {
             id: 'apps.help-center.faqs',
