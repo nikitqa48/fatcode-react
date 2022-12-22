@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 import FuseNavigation from '@fuse/core/FuseNavigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { Link } from '@mui/material';
 import { selectAllCategories, selectAllTags, getCategories, getTags } from '../store/blogSlice';
 
 function ArticleSidebarContent(props) {
@@ -35,7 +36,7 @@ function ArticleSidebarContent(props) {
           delay={300}
           className="text-4xl font-extrabold tracking-tight leading-none"
         >
-          <a href="/apps/help-center/articles">Блог</a>
+          <Link href="/apps/help-center/articles">Блог</Link>
         </Typography>
       </div>
 

@@ -9,7 +9,7 @@ export const getArticles = createAsyncThunk('articles/getArticles', async (categ
   return data.results;
 });
 
-const articlesAdapter = createEntityAdapter({});
+// const articlesAdapter = createEntityAdapter({});
 
 // export const { selectAll: selectArticles } = articlesAdapter.getSelectors(
 //   (state) => state.helpCenterApp.articles
