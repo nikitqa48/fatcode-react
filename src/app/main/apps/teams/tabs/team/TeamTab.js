@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import TeamsWidget from './widgets/TeamsWidget';
+import TeamMembersWidget from './widgets/TeamMembersWidget';
 
 function TeamTab() {
   const container = {
@@ -23,7 +23,7 @@ function TeamTab() {
       animate="show"
     >
       <motion.div variants={item} className="widget flex w-full">
-        <TeamsWidget />
+        <TeamMembersWidget />
       </motion.div>
     </motion.div>
   );

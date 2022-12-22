@@ -1,53 +1,13 @@
 import Avatar from '@mui/material/Avatar';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import _ from '@lodash';
+import { useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { selectUser } from 'app/store/userSlice';
-import { getTeams, selectTeams } from './store/teamsSlice';
+import { Link } from 'react-router-dom';
 
 function TeamsAppHeader(props) {
-  const dispatch = useDispatch();
-  const teams = useSelector(selectTeams);
   const user = useSelector(selectUser);
-
-  const [selectedTeam, setSelectedTeam] = useState({
-    id: 1,
-    menuEl: null,
-  });
-
-  useEffect(() => {
-    dispatch(getTeams());
-  }, [dispatch]);
-
-  function handleChangeTeam(id) {
-    setSelectedTeam({
-      id,
-      menuEl: null,
-    });
-  }
-
-  function handleOpenTeamMenu(event) {
-    setSelectedTeam({
-      id: selectedTeam.id,
-      menuEl: event.currentTarget,
-    });
-  }
-
-  function handleCloseTeamMenu() {
-    setSelectedTeam({
-      id: selectedTeam.id,
-      menuEl: null,
-    });
-  }
-
-  if (_.isEmpty(teams)) {
-    return null;
-  }
 
   return (
     <div className="flex flex-col w-full px-24 sm:px-32">
@@ -92,39 +52,34 @@ function TeamsAppHeader(props) {
       </div>
       <div className="flex items-center">
         <Button
-          onClick={handleOpenTeamMenu}
+          component={Link}
+          to="all"
           className="flex items-center border border-solid border-b-0 rounded-t-xl rounded-b-0 h-40 px-16 text-13 sm:text-16"
           variant="default"
           sx={{
             backgroundColor: (theme) => theme.palette.background.default,
             borderColor: (theme) => theme.palette.divider,
           }}
-          endIcon={
-            <FuseSvgIcon size={20} color="action">
-              heroicons-solid:chevron-down
-            </FuseSvgIcon>
-          }
+          // endIcon={
+          // <FuseSvgIcon size={20} color="action">
+          //   heroicons-solid:chevron-down
+          // </FuseSvgIcon>
+          // /*}*/
         >
-          {_.find(teams.results, ['id', selectedTeam.id]).name}
+          Все команды
         </Button>
-        <Menu
-          id="project-menu"
-          anchorEl={selectedTeam.menuEl}
-          open={Boolean(selectedTeam.menuEl)}
-          onClose={handleCloseTeamMenu}
+
+        <Button
+          component={Link}
+          to="/teams/my"
+          className="flex items-center border border-solid border-b-0 rounded-t-xl rounded-b-0 h-40 px-16 text-13 sm:text-16"
+          sx={{
+            backgroundColor: (theme) => theme.palette.background.default,
+            borderColor: (theme) => theme.palette.divider,
+          }}
         >
-          {teams.results &&
-            teams.results.map((team) => (
-              <MenuItem
-                key={team.id}
-                onClick={(ev) => {
-                  handleChangeTeam(team.id);
-                }}
-              >
-                {team.name}
-              </MenuItem>
-            ))}
-        </Menu>
+          Мои команды
+        </Button>
       </div>
     </div>
   );
