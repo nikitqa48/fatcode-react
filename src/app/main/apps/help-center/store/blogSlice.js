@@ -18,6 +18,16 @@ export const getCategories = createAsyncThunk('blog/getCategories', async () => 
   }
 });
 
+export const getTags = createAsyncThunk('blog/getTags', async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/knowledge/tag/`);
+    const data = await response.data;
+    return data.results;
+  } catch (error) {
+    return error.data;
+  }
+});
+
 const blogSlice = createSlice({
   name: 'blog',
   initialState,
@@ -26,9 +36,12 @@ const blogSlice = createSlice({
     [getCategories.fulfilled]: (state, action) => {
       state.categories = action.payload;
     },
+    [getTags.fulfilled]: (state, action) => {
+      state.tags = action.payload;
+    },
   },
 });
 
 export const selectAllCategories = ({ helpCenterApp }) => helpCenterApp.blog.categories;
-
+export const selectAllTags = ({ helpCenterApp }) => helpCenterApp.blog.tags;
 export default blogSlice.reducer;
