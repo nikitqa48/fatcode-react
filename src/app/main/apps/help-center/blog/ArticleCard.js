@@ -5,18 +5,20 @@ import Typography from '@mui/material/Typography';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Card from '@mui/material/Card';
 
-function ArticleCard() {
+function ArticleCard(props) {
+
   return (
     <Card
       component={Link}
-      to="faqs"
+      to={`/apps/help-center/article/${props.article.id}`}
       role="button"
       className="relative flex flex-col rounded-2xl shadow hover:shadow-lg overflow-hidden transition-shadow ease-in-out duration-150"
     >
       <div className="flex flex-col flex-auto items-center justify-center p-32 text-center">
-        <div className="text-2xl font-semibold">FAQs</div>
+        <img src={props.article.picture}/>
+        <div className="text-2xl font-semibold">{props.article.title}</div>
         <div className="md:max-w-160 mt-4" color="text.secondary">
-          Frequently asked questions and answers
+          {props.article.date_update}
         </div>
       </div>
       <Box
@@ -29,7 +31,7 @@ function ArticleCard() {
         }}
       >
         <Typography color="secondary" className="mx-8">
-          Go to FAQs
+          Читать
         </Typography>
         <FuseSvgIcon size={20} color="secondary">
           heroicons-solid:arrow-narrow-right

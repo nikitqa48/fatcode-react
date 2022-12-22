@@ -3,20 +3,12 @@ import Typography from '@mui/material/Typography';
 import FuseNavigation from '@fuse/core/FuseNavigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { selectAllCategories, getCategories } from '../store/blogSlice';
-
-// import {selectFilters} from './store/filtersSlice';
-// import {selectLabels} from './store/labelsSlice';
+import { selectAllCategories, selectAllTags, getCategories, getTags } from '../store/blogSlice';
 
 function ArticleSidebarContent(props) {
   const dispatch = useDispatch();
   const categories = useSelector(selectAllCategories);
-  const tags = [
-    {
-      id: '7c004a19-4506-48ef-93ab-f16381302e3b',
-      name: 'Inbox',
-    },
-  ];
+  const tags = useSelector(selectAllTags);
   const filters = [
     {
       id: '7c004a19-4506-48ef-93ab-f16381302e3b',
@@ -26,6 +18,7 @@ function ArticleSidebarContent(props) {
 
   useEffect(() => {
     dispatch(getCategories());
+    dispatch(getTags());
   }, [dispatch]);
 
   return (
@@ -42,7 +35,7 @@ function ArticleSidebarContent(props) {
           delay={300}
           className="text-4xl font-extrabold tracking-tight leading-none"
         >
-          Блог
+          <a href="/apps/help-center/articles">Блог</a>
         </Typography>
       </div>
 
@@ -53,10 +46,10 @@ function ArticleSidebarContent(props) {
 
         <FuseNavigation
           navigation={categories.map((item) => ({
-            id: item.id,
+            id: String(item.id),
             title: item.name,
             type: 'item',
-            url: `/${item.id}`,
+            url: `category/${item.id}`,
           }))}
         />
       </div>
@@ -70,7 +63,7 @@ function ArticleSidebarContent(props) {
           navigation={filters.map((item) => ({
             ...item,
             type: 'item',
-            url: `/apps/mailbox/filter/${item.slug}`,
+            url: `item.id`,
           }))}
         />
       </div>
@@ -82,9 +75,10 @@ function ArticleSidebarContent(props) {
 
         <FuseNavigation
           navigation={tags.map((item) => ({
-            ...item,
+            id: String(item.id),
+            title: item.name,
             type: 'item',
-            url: `/apps/mailbox/label/${item.slug}`,
+            url: `tags/${item.id}`,
           }))}
         />
       </div>
