@@ -1,3 +1,4 @@
+import { Navigate } from 'react-router-dom';
 import HelpCenterHome from './home/HelpCenterHome';
 import HelpCenterFaqs from './faqs/HelpCenterFaqs';
 import HelpCenterGuides from './guides/HelpCenterGuides';
@@ -6,6 +7,8 @@ import HelpCenterApp from './HelpCenterApp';
 import GuideCategory from './guides/GuideCategory';
 import GuideCategories from './guides/GuideCategories';
 import HelpCenterGuide from './guide/HelpCenterGuide';
+import Articles from './blog/Articles';
+import Article from './blog/Article';
 
 const HelpCenterAppConfig = {
   settings: {
@@ -41,6 +44,36 @@ const HelpCenterAppConfig = {
               element: <HelpCenterGuide />,
             },
           ],
+        },
+        {
+          path: 'articles',
+          element: <Articles />,
+          children: [
+            {
+              path: '',
+              element: <Navigate to="/apps/help-center/articles" />,
+            },
+            // {
+            //   path: ':articleId',
+            //   element: <Article />,
+            // },
+            {
+              path: 'category/:categoryId',
+              element: <Articles />,
+            },
+            {
+              path: 'tag/:tagId',
+              element: <Articles />,
+            },
+            {
+              path: 'articles',
+              element: <Articles />,
+            },
+          ],
+        },
+        {
+          path: 'article/:articleId',
+          element: <Article />,
         },
         {
           path: 'support',
