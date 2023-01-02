@@ -35,7 +35,7 @@ function HelpCenterHome() {
           <div className="flex flex-col items-center justify-center  mx-auto w-full">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0 } }}>
               <Typography color="inherit" className="text-18 font-semibold">
-                HELP CENTER
+                База знаний
               </Typography>
             </motion.div>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0 } }}>
@@ -134,7 +134,7 @@ function HelpCenterHome() {
             className="relative flex flex-col rounded-2xl shadow hover:shadow-lg overflow-hidden transition-shadow ease-in-out duration-150"
           >
             <div className="flex flex-col flex-auto items-center justify-center p-32 text-center">
-              <div className="text-2xl font-semibold">Guides</div>
+              <div className="text-2xl font-semibold">Глоссарий</div>
               <div className="md:max-w-160 mt-4" color="text.secondary">
                 Articles and resources to guide you
               </div>
@@ -149,7 +149,7 @@ function HelpCenterHome() {
               }}
             >
               <Typography color="secondary" className="mx-8">
-                Check guides
+                Перейти в глоссарий
               </Typography>
               <FuseSvgIcon size={20} color="secondary">
                 heroicons-solid:arrow-narrow-right

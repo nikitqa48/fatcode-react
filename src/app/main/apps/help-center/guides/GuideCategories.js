@@ -25,7 +25,7 @@ function GuideCategories() {
             color="secondary"
             startIcon={<FuseSvgIcon>heroicons-outline:arrow-narrow-left</FuseSvgIcon>}
           >
-            Back to Help Center
+            Назад
           </Button>
         </div>
         <div className="mt-8 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight">
@@ -40,7 +40,7 @@ function GuideCategories() {
                 className="mb-4 text-2xl font-semibold"
                 role="button"
               >
-                {category.title}
+                {category.name}
               </Typography>
 
               <GuideListMenu list={category.guides} categorySlug={category.slug} maxItems={4} />

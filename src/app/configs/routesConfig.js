@@ -14,7 +14,7 @@ import pagesConfigs from '../main/pages/pagesConfigs';
 import authRoleExamplesConfigs from '../main/auth/authRoleExamplesConfigs';
 import DocumentationConfig from '../main/documentation/DocumentationConfig';
 
-// импортирую страницу, если был зыбвт пароль
+// импортирую страницу, если был забыт пароль
 import ForgotPasswordPagesConfig from '../main/forgot-password/ForgotPasswordPagesConfig';
 
 const routeConfigs = [

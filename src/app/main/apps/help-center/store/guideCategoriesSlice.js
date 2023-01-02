@@ -4,16 +4,15 @@ import {
   createSelector,
   createSlice,
 } from '@reduxjs/toolkit';
-import axios from 'axios';
+import api from 'src/app/api/fatcode'
 import _ from '@lodash';
 
 export const getGuideCategories = createAsyncThunk(
   'helpCenterApp/guideCategories/get',
   async () => {
-    const response = await axios.get('api/help-center/guides/categories');
+    const response = await api.get('api/v1/knowledge/category/');
     const data = await response.data;
-
-    return data;
+    return data.results;
   }
 );
 
